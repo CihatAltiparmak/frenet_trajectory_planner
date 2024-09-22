@@ -1,12 +1,15 @@
 #ifndef _FRENET_TRAJECTORY_PLANNER__POLICIES__BASE_POLICY_
 #define _FRENET_TRAJECTORY_PLANNER__POLICIES__BASE_POLICY_
 
+#include <vector>
+#include <iostream>
+
 namespace frenet_trajectory_planner
 {
 namespace policies
 {
 
-template<typename FrenetTrajectoryArray, typename Parameters>
+template<typename FrenetTrajectory, typename Parameters>
 class BasePolicy
 {
 public:
@@ -15,9 +18,16 @@ public:
   {
   }
 
-  virtual void eliminate_trajectories(const FrenetTrajectoryArray & frenet_trajectory_array);
+  virtual std::vector<FrenetTrajectory> eliminate_trajectories(
+    const std::vector<FrenetTrajectory> & frenet_trajectory_array)
+  = 0;
 
-private:
+  Parameters getParameters() const
+  {
+    return parameters_;
+  }
+
+protected:
   Parameters parameters_;
 };
 
