@@ -7,21 +7,29 @@ namespace frenet_trajectory_planner
 namespace policies
 {
 
+typedef struct State
+{
+  double acceleration;
+} State;
+
 typedef struct AccelerationLimits
 {
   double acceleration_min;
   double acceleration_max;
 } AccelerationPolicyParameters;
 
-template<typename FrenetTrajectoryArray>
-class AccelerationPolicy : public BasePolicy<FrenetTrajectoryArray, AccelerationPolicyParameters>
+template<typename FrenetTrajectory>
+class AccelerationPolicy : public BasePolicy<FrenetTrajectory, AccelerationPolicyParameters>
 {
 public:
   AccelerationPolicy(const AccelerationPolicyParameters & acceleration_policy_parameters);
-  void eliminate_trajectories(const FrenetTrajectoryArray & frenet_trajectory_array);
+  std::vector<FrenetTrajectory> eliminate_trajectories(
+    const std::vector<FrenetTrajectory> & frenet_trajectory_array)
+  override;
+  bool check_trajectory_by_policy(const FrenetTrajectory & frenet_trajectory);
 };
 
-template class AccelerationPolicy<std::vector<std::tuple<double, double, double>>>;
+template class AccelerationPolicy<std::vector<State>>;
 
 }
 }
