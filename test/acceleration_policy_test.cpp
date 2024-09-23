@@ -6,21 +6,26 @@
 
 TEST(frenet_trajectory_planner, acceleration_policy_test_initialization) {
 
-
-  using frenet_trajectory_planner::policies::State;
+  struct FrenetState
+  {
+    double acceleration;
+  };
   using frenet_trajectory_planner::policies::AccelerationPolicy;
   using frenet_trajectory_planner::policies::AccelerationPolicyParameters;
-  using FrenetTrajectory = std::vector<State>;
+  using FrenetTrajectory = std::vector<FrenetState>;
 
 
   AccelerationPolicy<FrenetTrajectory> acceleration_policy(AccelerationPolicyParameters{});
 }
 
 TEST(frenet_trajectory_planner, acceleration_policy_test_eliminate_trajectories) {
-  using frenet_trajectory_planner::policies::State;
+  struct FrenetState
+  {
+    double acceleration;
+  };
   using frenet_trajectory_planner::policies::AccelerationPolicy;
   using frenet_trajectory_planner::policies::AccelerationPolicyParameters;
-  using FrenetTrajectory = std::vector<State>;
+  using FrenetTrajectory = std::vector<FrenetState>;
 
   AccelerationPolicyParameters parameters = {
     -1.0, // acceleration_min

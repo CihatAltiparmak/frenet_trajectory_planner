@@ -5,6 +5,11 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+find_package(Eigen3 QUIET NO_MODULE)
+if(NOT Eigen3_FOUND)
+  find_package(Eigen3 REQUIRED)
+endif()
+
 # if(NOT "${CMAKE_CXX_STANDARD}")
 #     set(CMAKE_CXX_STANDARD 17)
 #   endif()
@@ -26,13 +31,30 @@ if(BUILD_TESTING)
 
   ament_add_gtest(
     acceleration_policy_test
-    test/acceleration_policy_test.cpp
-    src/policies/acceleration_policy.cpp)
+    test/acceleration_policy_test.cpp)
 
   target_include_directories(
     acceleration_policy_test
     PUBLIC $<INSTALL_INTERFACE:include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+  ament_add_gtest(
+    quintic_trajectory_planner_test
+    test/quintic_trajectory_planner_test.cpp
+    src/quintic_trajectory_planner.cpp)
+
+  target_include_directories(quintic_trajectory_planner_test
+    PUBLIC $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+  target_include_directories(quintic_trajectory_planner_test PUBLIC ${Eigen3_INCLUDE_DIRS})
+  target_link_libraries(quintic_trajectory_planner_test  Eigen3::Eigen)
+
+  # if(TARGET Eigen3::Eigen)
+  #   target_link_libraries(quintic_trajectory_planner_test PUBLIC Eigen3::Eigen)
+  # else()
+  #   target_include_directories(quintic_trajectory_planner_test PUBLIC ${Eigen3_INCLUDE_DIRS})
+  # endif()
 
 endif()
 
