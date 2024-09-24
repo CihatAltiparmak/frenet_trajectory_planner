@@ -50,6 +50,32 @@ if(BUILD_TESTING)
   target_include_directories(quintic_trajectory_planner_test PUBLIC ${Eigen3_INCLUDE_DIRS})
   target_link_libraries(quintic_trajectory_planner_test  Eigen3::Eigen)
 
+  ament_add_gtest(
+    quartic_trajectory_planner_test
+    test/quartic_trajectory_planner_test.cpp
+    src/quartic_trajectory_planner.cpp)
+
+  target_include_directories(quartic_trajectory_planner_test
+    PUBLIC $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+  target_include_directories(quartic_trajectory_planner_test PUBLIC ${Eigen3_INCLUDE_DIRS})
+  target_link_libraries(quartic_trajectory_planner_test  Eigen3::Eigen)
+
+  ament_add_gtest(
+    frenet_trajectory_generator_test
+    test/frenet_trajectory_generator_test.cpp
+    src/frenet_trajectory_generator.cpp
+    src/quartic_trajectory_planner.cpp
+    src/quintic_trajectory_planner.cpp)
+
+  target_include_directories(frenet_trajectory_generator_test
+    PUBLIC $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+  target_include_directories(frenet_trajectory_generator_test PUBLIC ${Eigen3_INCLUDE_DIRS})
+  target_link_libraries(frenet_trajectory_generator_test  Eigen3::Eigen)
+
   # if(TARGET Eigen3::Eigen)
   #   target_link_libraries(quintic_trajectory_planner_test PUBLIC Eigen3::Eigen)
   # else()

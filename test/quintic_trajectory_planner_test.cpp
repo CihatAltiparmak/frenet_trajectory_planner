@@ -16,15 +16,15 @@ TEST(frenet_trajectory_planner, quintic_trajectory_planner_test_set_coefficients
       0, 0, 0, 1, 0, 0, 0,
       1), true);
 
-  ASSERT_NEAR(quintic_trajectory_planner.x(1), 1, 0.001);
-  ASSERT_NEAR(quintic_trajectory_planner.dx(1), 0, 0.001);
-  ASSERT_NEAR(quintic_trajectory_planner.ddx(1), 0, 0.001);
+  ASSERT_NEAR(quintic_trajectory_planner.x(1), 1, 1e-12);
+  ASSERT_NEAR(quintic_trajectory_planner.dx(1), 0, 1e-12);
+  ASSERT_NEAR(quintic_trajectory_planner.ddx(1), 0, 1e-12);
 
-  ASSERT_NEAR(quintic_trajectory_planner.x(0), 0, 0.001);
-  ASSERT_NEAR(quintic_trajectory_planner.dx(0), 0, 0.001);
-  ASSERT_NEAR(quintic_trajectory_planner.ddx(0), 0, 0.001);
+  ASSERT_NEAR(quintic_trajectory_planner.x(0), 0, 1e-12);
+  ASSERT_NEAR(quintic_trajectory_planner.dx(0), 0, 1e-12);
+  ASSERT_NEAR(quintic_trajectory_planner.ddx(0), 0, 1e-12);
 
-  ASSERT_NEAR(quintic_trajectory_planner.x(0.5), 0.5, 0.001);
+  ASSERT_NEAR(quintic_trajectory_planner.x(0.5), 0.5, 1e-12);
 }
 
 int main(int argc, char ** argv)
