@@ -40,7 +40,9 @@ get_all_possible_frenet_trajectories(
 
       FrenetState frenet_state_final = {state_longtitutal_final, state_lateral_final};
       auto frenet_trajectory = get_frenet_trajectory(frenet_state_initial, frenet_state_final);
-      frenet_trajectories.push_back(frenet_trajectory);
+      if (!frenet_trajectory.empty()) {
+        frenet_trajectories.push_back(frenet_trajectory);
+      }
     }
   }
 
@@ -54,7 +56,7 @@ std::vector<FrenetState> FrenetTrajectoryGenerator::get_frenet_trajectory(
   auto longtitual_state_initial = std::get<0>(frenet_state_initial);
   auto longtitual_state_final = std::get<0>(frenet_state_final);
   auto longtitutal_velocity_planner = QuarticTrajectoryPlanner();
-  if (longtitutal_velocity_planner.set_coefficients_or_return_false(
+  if (!longtitutal_velocity_planner.set_coefficients_or_return_false(
       longtitual_state_initial[0], longtitual_state_initial[1], longtitual_state_initial[2],
       longtitual_state_final[1], longtitual_state_final[2],
       0, 1))
@@ -65,7 +67,7 @@ std::vector<FrenetState> FrenetTrajectoryGenerator::get_frenet_trajectory(
   auto lateral_state_initial = std::get<1>(frenet_state_initial);
   auto lateral_state_final = std::get<1>(frenet_state_final);
   auto lateral_distance_planner = QuinticTrajectoryPlanner();
-  if (lateral_distance_planner.set_coefficients_or_return_false(
+  if (!lateral_distance_planner.set_coefficients_or_return_false(
       lateral_state_initial[0], lateral_state_initial[1], lateral_state_initial[2],
       lateral_state_final[1], lateral_state_final[1], lateral_state_final[2],
       0, 1))

@@ -15,12 +15,16 @@ TEST(frenet_trajectory_planner, quartic_trajectory_planner_test_set_coefficients
     quartic_trajectory_planner.set_coefficients_or_return_false(
       0, 0, 0, 1, 0, 0, 1), true);
 
-  ASSERT_NEAR(quartic_trajectory_planner.x(1), 1, 1e-4);
-  ASSERT_NEAR(quartic_trajectory_planner.dx(1), 0, 1e-4);
+  // check if the longtitutal velocity is 1 when time is 1 sec
+  ASSERT_NEAR(quartic_trajectory_planner.dx(1), 1, 1e-4);
+  // check if the longtitutal acceleration is 0 when time is 1 sec
   ASSERT_NEAR(quartic_trajectory_planner.ddx(1), 0, 1e-4);
 
+  // check if the longtitutal distance is 0 when time is 0 sec
   ASSERT_NEAR(quartic_trajectory_planner.x(0), 0, 1e-4);
+  // check if the longtitutal velocity is 0 when time is 0 sec
   ASSERT_NEAR(quartic_trajectory_planner.dx(0), 0, 1e-4);
+  // check if the longtitutal acceleration is 0 when time is 0 sec
   ASSERT_NEAR(quartic_trajectory_planner.ddx(0), 0, 1e-4);
 
   // ASSERT_NEAR(quartic_trajectory_planner.x(0.5), 0.5, 1e-12);
