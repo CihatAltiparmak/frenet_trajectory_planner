@@ -58,8 +58,7 @@ double QuarticTrajectoryPlanner::dx(const double t)
   return coff_[0] +
          2 * coff_[1] * t +
          3 * (coff_[2] * std::pow(t, 2)) +
-         4 * (coff_[3] * std::pow(t, 3)) +
-         5 * (coff_[4] * std::pow(t, 4));
+         4 * (coff_[3] * std::pow(t, 3));
   // clang-format on
 }
 
@@ -68,8 +67,7 @@ double QuarticTrajectoryPlanner::ddx(const double t)
   // clang-format off
   return 2 * coff_[1] +
          6 * coff_[2] * t +
-         12 * (coff_[3] * std::pow(t, 2)) +
-         20 * (coff_[4] * std::pow(t, 3));
+         12 * (coff_[3] * std::pow(t, 2));
   // clang-format on
 }
 
