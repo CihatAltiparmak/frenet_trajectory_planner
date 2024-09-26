@@ -13,7 +13,8 @@ namespace frenet_trajectory_planner
 
 using StateLateral = Vector3d;
 using StateLongtitutal = Vector3d;
-using FrenetState = std::tuple<StateLongtitutal, StateLateral>;
+using FrenetState = Vector<double, 6>;
+using FrenetTrajectory = std::vector<FrenetState>;
 
 class FrenetTrajectoryGenerator
 {
@@ -26,10 +27,10 @@ public:
     double max_longtitutal_velocity,
     double step_longtitutal_velocity);
 
-  std::vector<std::vector<FrenetState>> get_all_possible_frenet_trajectories(
+  std::vector<FrenetTrajectory> get_all_possible_frenet_trajectories(
     const FrenetState & frenet_state_initial);
 
-  std::vector<FrenetState> get_frenet_trajectory(
+  FrenetTrajectory get_frenet_trajectory(
     const FrenetState & frenet_state_initial,
     const FrenetState & frenet_state_final);
 

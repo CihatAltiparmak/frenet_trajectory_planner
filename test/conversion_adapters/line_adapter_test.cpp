@@ -6,22 +6,24 @@
 #define _USE_MATH_DEFINES
 
 TEST(frenet_trajectory_planner, conversion_adapters_line_adapter_test_initialization) {
-  Vector2d t_frenet;
-  t_frenet << 0, 1;
+  using frenet_trajectory_planner::CartesianPoint;
 
-  Vector2d x0;
-  x0 << 1, 1;
-  auto adapter = frenet_trajectory_planner::LineAdapter(t_frenet, x0);
+  CartesianPoint x_start;
+  x_start << 1, 1;
+  CartesianPoint x_finish;
+  x_finish << 1, 2;
+  auto adapter = frenet_trajectory_planner::LineAdapter(x_start, x_finish);
 }
 
 TEST(frenet_trajectory_planner, conversion_adapters_line_adapter_test_convert_frenet2cartesian) {
+  using frenet_trajectory_planner::CartesianPoint;
   {
-    Vector2d t_frenet;
-    t_frenet << 0, 1;
 
-    Vector2d x0;
-    x0 << 1, 1;
-    auto adapter = frenet_trajectory_planner::LineAdapter(t_frenet, x0);
+    CartesianPoint x_start;
+    x_start << 1, 1;
+    CartesianPoint x_finish;
+    x_finish << 1, 2;
+    auto adapter = frenet_trajectory_planner::LineAdapter(x_start, x_finish);
 
     frenet_trajectory_planner::FrenetState frenet_state =
       frenet_trajectory_planner::FrenetState::Zero();
@@ -32,12 +34,11 @@ TEST(frenet_trajectory_planner, conversion_adapters_line_adapter_test_convert_fr
   }
 
   {
-    Vector2d t_frenet;
-    t_frenet << 1 / std::sqrt(2), 1 / std::sqrt(2);
-
-    Vector2d x0;
-    x0 << 1, 1;
-    auto adapter = frenet_trajectory_planner::LineAdapter(t_frenet, x0);
+    CartesianPoint x_start;
+    x_start << 1, 1;
+    CartesianPoint x_finish;
+    x_finish << 1 + 1 / std::sqrt(2), 1 + 1 / std::sqrt(2);
+    auto adapter = frenet_trajectory_planner::LineAdapter(x_start, x_finish);
 
     frenet_trajectory_planner::FrenetState frenet_state =
       frenet_trajectory_planner::FrenetState::Zero();
@@ -48,12 +49,11 @@ TEST(frenet_trajectory_planner, conversion_adapters_line_adapter_test_convert_fr
   }
 
   {
-    Vector2d t_frenet;
-    t_frenet << 1, 0;
-
-    Vector2d x0;
-    x0 << 1, 1;
-    auto adapter = frenet_trajectory_planner::LineAdapter(t_frenet, x0);
+    CartesianPoint x_start;
+    x_start << 1, 1;
+    CartesianPoint x_finish;
+    x_finish << 2, 1;
+    auto adapter = frenet_trajectory_planner::LineAdapter(x_start, x_finish);
 
     frenet_trajectory_planner::FrenetState frenet_state =
       frenet_trajectory_planner::FrenetState::Zero();
@@ -65,13 +65,19 @@ TEST(frenet_trajectory_planner, conversion_adapters_line_adapter_test_convert_fr
 }
 
 TEST(frenet_trajectory_planner, conversion_adapters_line_adapter_test_convert_cartesian2frenet) {
+  using frenet_trajectory_planner::CartesianPoint;
   {
     Vector2d t_frenet;
     t_frenet << 0, 1;
 
     Vector2d x0;
     x0 << 1, 1;
-    auto adapter = frenet_trajectory_planner::LineAdapter(t_frenet, x0);
+
+    CartesianPoint x_start;
+    x_start << 0, 1;
+    CartesianPoint x_finish;
+    x_finish << 1, 2;
+    auto adapter = frenet_trajectory_planner::LineAdapter(x_start, x_finish);
 
     frenet_trajectory_planner::CartesianState cartesian_state;
     cartesian_state << -1, 0, 0, 1, 0, 0, M_PI / 2;

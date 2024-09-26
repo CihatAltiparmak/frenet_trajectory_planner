@@ -68,6 +68,17 @@ target_include_directories(line_adapter_test
 target_include_directories(line_adapter_test PUBLIC ${Eigen3_INCLUDE_DIRS})
 target_link_libraries(line_adapter_test  Eigen3::Eigen)
 
+ament_add_gtest(
+  frenet_frame_converter_test
+  frenet_frame_converter_test.cpp)
+
+target_include_directories(frenet_frame_converter_test
+  PUBLIC $<INSTALL_INTERFACE:include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>)
+
+target_include_directories(frenet_frame_converter_test PUBLIC ${Eigen3_INCLUDE_DIRS})
+target_link_libraries(frenet_frame_converter_test  Eigen3::Eigen)
+
 # if(TARGET Eigen3::Eigen)
 #   target_link_libraries(quintic_trajectory_planner_test PUBLIC Eigen3::Eigen)
 # else()
