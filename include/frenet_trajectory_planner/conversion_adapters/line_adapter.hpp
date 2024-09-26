@@ -53,9 +53,9 @@ FrenetState LineAdapter::convert_cartesian2frenet(const CartesianState & cartesi
   T << (cartesian_state[0] - x0_[0]), cartesian_state[3] - x0_[1],
     cartesian_state[1], cartesian_state[4],
     cartesian_state[2], cartesian_state[5],
-    -(cartesian_state[0] - x0_[0]), cartesian_state[3] - x0_[1],
-    -cartesian_state[1], cartesian_state[4],
-    -cartesian_state[2], cartesian_state[5];
+    -(cartesian_state[3] - x0_[1]), cartesian_state[0] - x0_[0],
+    -cartesian_state[4], cartesian_state[1],
+    -cartesian_state[5], cartesian_state[2];
 
   FrenetState frenet_state = T * t_frenet_;
 
