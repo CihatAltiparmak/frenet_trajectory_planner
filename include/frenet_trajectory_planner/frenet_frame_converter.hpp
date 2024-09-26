@@ -1,12 +1,17 @@
+#pragma once
+
+#include <frenet_trajectory_planner/type_definitions.hpp>
+
 namespace frenet_trajectory_planner
 {
 
 template<typename ConversionAdapter>
-template<typename ... ConversionAdapterArgs>
 class Frenet2CartesianConverter
 {
 public:
+  template<typename ... ConversionAdapterArgs>
   Frenet2CartesianConverter(const ConversionAdapterArgs & ... conversion_adapter_args);
+
   CartesianTrajectory convert_trajectory(const FrenetTrajectory & frenet_trajectory);
   std::vector<CartesianTrajectory> convert_trajectory_list(
     const std::vector<FrenetTrajectory> & frenet_trajectory_list);
@@ -17,14 +22,16 @@ private:
 
 template<typename ConversionAdapter>
 template<typename ... ConversionAdapterArgs>
-Frenet2CartesianConverter::Frenet2CartesianConverter(
+Frenet2CartesianConverter<ConversionAdapter>::Frenet2CartesianConverter(
   const ConversionAdapterArgs & ... conversion_adapter_args)
 : conversion_adapter_(conversion_adapter_args ...)
 {
 
 }
 
-CartesianTrajectory convert_trajectory(const FrenetTrajectory & frenet_trajectory)
+template<typename ConversionAdapter>
+CartesianTrajectory Frenet2CartesianConverter<ConversionAdapter>::convert_trajectory(
+  const FrenetTrajectory & frenet_trajectory)
 {
   CartesianTrajectory cartesian_trajectory;
   for (const auto & frenet_state : frenet_trajectory) {
@@ -35,8 +42,9 @@ CartesianTrajectory convert_trajectory(const FrenetTrajectory & frenet_trajector
   return cartesian_trajectory;
 }
 
-std::vector<CartesianTrajectory> convert_trajectory_list(
-  const std::vector<FrenetTrajectory> & frenet_trajectory_list)
+template<typename ConversionAdapter>
+std::vector<CartesianTrajectory> Frenet2CartesianConverter<ConversionAdapter>::
+convert_trajectory_list(const std::vector<FrenetTrajectory> & frenet_trajectory_list)
 {
   std::vector<CartesianTrajectory> cartesian_trajectory_list;
 

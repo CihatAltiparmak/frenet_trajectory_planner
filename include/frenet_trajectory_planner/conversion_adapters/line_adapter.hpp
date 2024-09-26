@@ -14,7 +14,7 @@ namespace frenet_trajectory_planner
 class LineAdapter
 {
 public:
-  LineAdapter(const Vector2d & t_frenet, const Vector2d & x0);
+  LineAdapter(const CartesianPoint & start_point, const CartesianPoint & final_point);
   CartesianState convert_frenet2cartesian(const FrenetState & frenet_state);
   FrenetState convert_cartesian2frenet(const CartesianState & cartesian_state);
 
@@ -23,9 +23,17 @@ private:
   Vector2d x0_;
 };
 
-LineAdapter::LineAdapter(const Vector2d & t_frenet, const Vector2d & x0)
-: t_frenet_(t_frenet), x0_(x0)
+// LineAdapter::LineAdapter(const Vector2d & t_frenet, const Vector2d & x0)
+// : t_frenet_(t_frenet), x0_(x0)
+// {
+// }
+
+LineAdapter::LineAdapter(const CartesianPoint & start_point, const CartesianPoint & final_point)
 {
+  x0_ = start_point;
+
+  auto line_vec = final_point - start_point;
+  t_frenet_ = line_vec / line_vec.norm();
 }
 
 CartesianState LineAdapter::convert_frenet2cartesian(const FrenetState & frenet_state)
