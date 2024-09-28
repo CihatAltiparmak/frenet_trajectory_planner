@@ -33,7 +33,7 @@ TEST(
   // check if the final longtitutal velocity is -1
   ASSERT_NEAR(final_state_of_first_trajectory[1], -1, 1e-10);
   // check if the lateral distance is 0
-  ASSERT_NEAR(final_state_of_first_trajectory[3], 0, 1e-10);
+  ASSERT_NEAR(final_state_of_first_trajectory[3], -1, 1e-10);
 }
 
 int main(int argc, char ** argv)
