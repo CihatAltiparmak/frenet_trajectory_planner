@@ -32,7 +32,7 @@ TEST(
   auto final_state_of_first_trajectory = first_generated_frenet_trajectory.back();
   // check if the final longtitutal velocity is -1
   ASSERT_NEAR(final_state_of_first_trajectory[1], -1, 1e-10);
-  // check if the lateral distance is 0
+  // check if the lateral distance is -1
   ASSERT_NEAR(final_state_of_first_trajectory[3], -1, 1e-10);
 }
 
