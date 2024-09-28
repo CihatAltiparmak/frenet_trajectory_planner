@@ -16,6 +16,8 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
+add_subdirectory(demos)
+
 if(BUILD_TESTING)
   add_subdirectory(test)
 endif()
