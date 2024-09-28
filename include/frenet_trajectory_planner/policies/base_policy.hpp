@@ -9,8 +9,10 @@ namespace frenet_trajectory_planner
 namespace policies
 {
 
+class Policy {};
+
 template<typename FrenetTrajectory, typename Parameters>
-class BasePolicy
+class BasePolicy : public Policy
 {
 public:
   BasePolicy(const Parameters & parameters)
