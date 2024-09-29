@@ -19,6 +19,9 @@ target_include_directories(
   PUBLIC $<INSTALL_INTERFACE:include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>)
 
+target_include_directories(acceleration_policy_test PUBLIC ${Eigen3_INCLUDE_DIRS})
+target_link_libraries(acceleration_policy_test  Eigen3::Eigen)
+
 ament_add_gtest(
   quintic_trajectory_planner_test
   quintic_trajectory_planner_test.cpp
