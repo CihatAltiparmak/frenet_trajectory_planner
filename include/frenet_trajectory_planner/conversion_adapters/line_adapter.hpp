@@ -23,11 +23,6 @@ private:
   Vector2d x0_;
 };
 
-// LineAdapter::LineAdapter(const Vector2d & t_frenet, const Vector2d & x0)
-// : t_frenet_(t_frenet), x0_(x0)
-// {
-// }
-
 LineAdapter::LineAdapter(const CartesianPoint & start_point, const CartesianPoint & final_point)
 : BaseAdapter()
 {
@@ -48,9 +43,9 @@ CartesianState LineAdapter::convert_frenet2cartesian(const FrenetState & frenet_
   cartesian_state({0, 3}) = T * frenet_state({0, 3}) + x0_;
   cartesian_state({1, 4}) = T * frenet_state({1, 4});
   cartesian_state({2, 5}) = T * frenet_state({2, 5});
-  cartesian_state(6) = std::atan2(t_frenet_[1], t_frenet_[0]) + std::atan2(
-    frenet_state[1],
-    frenet_state[4]);
+  cartesian_state[6] = std::atan2(t_frenet_[1], t_frenet_[0]) + std::atan2(
+    frenet_state[4],
+    frenet_state[1]);
 
   return cartesian_state;
 
@@ -62,9 +57,9 @@ FrenetState LineAdapter::convert_cartesian2frenet(const CartesianState & cartesi
   T << (cartesian_state[0] - x0_[0]), cartesian_state[3] - x0_[1],
     cartesian_state[1], cartesian_state[4],
     cartesian_state[2], cartesian_state[5],
-    -(cartesian_state[3] - x0_[1]), cartesian_state[0] - x0_[0],
-    -cartesian_state[4], cartesian_state[1],
-    -cartesian_state[5], cartesian_state[2];
+    (cartesian_state[3] - x0_[1]), -(cartesian_state[0] - x0_[0]),
+    cartesian_state[4], -cartesian_state[1],
+    cartesian_state[5], -cartesian_state[2];
 
   FrenetState frenet_state = T * t_frenet_;
 
