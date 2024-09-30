@@ -1,8 +1,5 @@
-#include <vector>
-#include <tuple>
-#include <gtest/gtest.h>
 #include <frenet_trajectory_planner/quintic_trajectory_planner.hpp>
-
+#include <gtest/gtest.h>
 
 TEST(frenet_trajectory_planner, quintic_trajectory_planner_test_initialization) {
   auto quintic_trajectory_planner = frenet_trajectory_planner::QuinticTrajectoryPlanner();

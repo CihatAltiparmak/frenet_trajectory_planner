@@ -1,3 +1,6 @@
+#pragma once
+
+#include <frenet_trajectory_planner/type_definitions.hpp>
 #include <frenet_trajectory_planner/policies/base_policy.hpp>
 #include <frenet_trajectory_planner/costs/base_cost.hpp>
 #include <vector>

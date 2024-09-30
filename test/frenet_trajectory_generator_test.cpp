@@ -1,8 +1,5 @@
-#include <vector>
-#include <tuple>
-#include <gtest/gtest.h>
 #include <frenet_trajectory_planner/frenet_trajectory_generator.hpp>
-
+#include <gtest/gtest.h>
 
 TEST(frenet_trajectory_planner, frenet_trajectory_generator_test_initialization) {
 

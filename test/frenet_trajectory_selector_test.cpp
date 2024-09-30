@@ -1,12 +1,11 @@
-#include <vector>
-#include <tuple>
-#include <gtest/gtest.h>
+#include <frenet_trajectory_planner/type_definitions.hpp>
 #include <frenet_trajectory_planner/frenet_trajectory_selector.hpp>
 #include <frenet_trajectory_planner/policies/acceleration_policy.hpp>
 #include <frenet_trajectory_planner/policies/base_policy.hpp>
-#include <frenet_trajectory_planner/type_definitions.hpp>
 #include <frenet_trajectory_planner/conversion_adapters/line_adapter.hpp>
-#include <frenet_trajectory_planner/costs/distance_cost.hpp>
+#include <frenet_trajectory_planner/costs/lateral_distance_cost.hpp>
+
+#include <gtest/gtest.h>
 
 TEST(frenet_trajectory_planner, frenet_trajectory_selector_test_initialization) {
   using frenet_trajectory_planner::policies::AccelerationPolicy;

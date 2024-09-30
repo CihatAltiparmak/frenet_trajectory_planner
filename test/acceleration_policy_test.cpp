@@ -1,9 +1,9 @@
-#include <vector>
-#include <tuple>
-#include <gtest/gtest.h>
+#include <frenet_trajectory_planner/type_definitions.hpp>
 #include <frenet_trajectory_planner/policies/acceleration_policy.hpp>
 #include <frenet_trajectory_planner/conversion_adapters/line_adapter.hpp>
-#include <frenet_trajectory_planner/type_definitions.hpp>
+
+#include <vector>
+#include <gtest/gtest.h>
 
 TEST(frenet_trajectory_planner, acceleration_policy_test_initialization) {
 

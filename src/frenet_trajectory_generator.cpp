@@ -1,5 +1,7 @@
 #include <frenet_trajectory_planner/frenet_trajectory_generator.hpp>
 
+#include <frenet_trajectory_planner/type_definitions.hpp>
+
 namespace frenet_trajectory_planner
 {
 

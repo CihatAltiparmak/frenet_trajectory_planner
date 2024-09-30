@@ -1,5 +1,3 @@
-#pragma once
-
 #include <frenet_trajectory_planner/quintic_trajectory_planner.hpp>
 
 namespace frenet_trajectory_planner

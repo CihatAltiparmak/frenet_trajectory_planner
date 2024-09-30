@@ -3,7 +3,7 @@
 #include <frenet_trajectory_planner/frenet_frame_converter.hpp>
 #include <frenet_trajectory_planner/frenet_trajectory_selector.hpp>
 #include <frenet_trajectory_planner/policies/acceleration_policy.hpp>
-#include <frenet_trajectory_planner/costs/distance_cost.hpp>
+#include <frenet_trajectory_planner/costs/lateral_distance_cost.hpp>
 
 int main()
 {
