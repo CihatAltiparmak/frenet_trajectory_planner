@@ -110,7 +110,7 @@ FrenetTrajectory Cartesian2FrenetConverter<ConversionAdapter>::convert_trajector
   FrenetTrajectory frenet_trajectory;
   for (const auto & cartesian_state : cartesian_trajectory) {
     auto frenet_state = convert_state(cartesian_state);
-    frenet_state.push_back(frenet_state);
+    frenet_trajectory.push_back(frenet_state);
   }
 
   return frenet_trajectory;
