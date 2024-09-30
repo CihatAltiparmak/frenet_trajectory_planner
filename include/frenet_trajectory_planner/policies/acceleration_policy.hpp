@@ -1,7 +1,8 @@
+#pragma once
+
 #include <frenet_trajectory_planner/policies/base_policy.hpp>
 #include <frenet_trajectory_planner/frenet_frame_converter.hpp>
 #include <vector>
-#include <tuple>
 #include <cmath>
 
 namespace frenet_trajectory_planner

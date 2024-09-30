@@ -1,9 +1,8 @@
-#ifndef _FRENET_TRAJECTORY_PLANNER__POLICIES__BASE_POLICY_
-#define _FRENET_TRAJECTORY_PLANNER__POLICIES__BASE_POLICY_
+#pragma once
 
+#include <frenet_trajectory_planner/type_definitions.hpp>
 #include <vector>
 #include <iostream>
-#include <frenet_trajectory_planner/type_definitions.hpp>
 
 
 namespace frenet_trajectory_planner
@@ -47,5 +46,3 @@ protected:
 
 }
 }
-
-#endif

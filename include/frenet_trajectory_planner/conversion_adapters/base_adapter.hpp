@@ -1,15 +1,15 @@
+#pragma once
+
 namespace frenet_trajectory_planner
 {
 
-template<typename ... AdapterArgs>
 class BaseAdapter
 {
 public:
-  BaseAdapter(const AdapterArgs... adapter_args);
+  BaseAdapter();
 };
 
-template<typename..AdapterArgs>
-BaseAdapter::BaseAdapter(const AdapterArgs... adapter_args)
+BaseAdapter::BaseAdapter()
 {
 }
 

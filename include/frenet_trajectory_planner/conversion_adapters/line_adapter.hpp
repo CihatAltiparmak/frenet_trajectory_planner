@@ -1,5 +1,5 @@
-// #include <frenet_trajectory_planner/conversion_adapters/base_adapter.hpp>
 #pragma once
+#include <frenet_trajectory_planner/conversion_adapters/base_adapter.hpp>
 #include <frenet_trajectory_planner/type_definitions.hpp>
 #include <cmath>
 
@@ -11,7 +11,7 @@ using namespace Eigen;
 namespace frenet_trajectory_planner
 {
 
-class LineAdapter
+class LineAdapter : public BaseAdapter
 {
 public:
   LineAdapter(const CartesianPoint & start_point, const CartesianPoint & final_point);
@@ -29,6 +29,7 @@ private:
 // }
 
 LineAdapter::LineAdapter(const CartesianPoint & start_point, const CartesianPoint & final_point)
+: BaseAdapter()
 {
   x0_ = start_point;
 

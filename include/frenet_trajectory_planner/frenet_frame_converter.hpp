@@ -1,6 +1,7 @@
 #pragma once
 
 #include <frenet_trajectory_planner/type_definitions.hpp>
+#include <vector>
 
 namespace frenet_trajectory_planner
 {

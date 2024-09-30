@@ -1,6 +1,6 @@
 #pragma once
 
-#include <frenet_trajectory_planner/costs/distance_cost.hpp>
+#include <frenet_trajectory_planner/costs/base_cost.hpp>
 #include <cmath>
 
 namespace frenet_trajectory_planner

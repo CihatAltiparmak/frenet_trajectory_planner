@@ -1,9 +1,8 @@
-#include <vector>
-#include <tuple>
-#include <gtest/gtest.h>
+#include <frenet_trajectory_planner/type_definitions.hpp>
 #include <frenet_trajectory_planner/frenet_frame_converter.hpp>
 #include <frenet_trajectory_planner/conversion_adapters/line_adapter.hpp>
-#include <frenet_trajectory_planner/type_definitions.hpp>
+
+#include <gtest/gtest.h>
 
 
 TEST(

@@ -1,8 +1,6 @@
-#include <vector>
-#include <tuple>
-#include <gtest/gtest.h>
 #include <frenet_trajectory_planner/quartic_trajectory_planner.hpp>
 
+#include <gtest/gtest.h>
 
 TEST(frenet_trajectory_planner, quartic_trajectory_planner_test_initialization) {
   auto quartic_trajectory_planner = frenet_trajectory_planner::QuarticTrajectoryPlanner();
