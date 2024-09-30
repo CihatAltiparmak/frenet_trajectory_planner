@@ -1,4 +1,4 @@
-#include <frenet_trajectory_planner/frenet_trajectory_planner.hpp>
+#pragma once
 
 #include <frenet_trajectory_planner/type_definitions.hpp>
 #include <frenet_trajectory_planner/frenet_trajectory_selector.hpp>
@@ -9,10 +9,29 @@
 #include <frenet_trajectory_planner/costs/longtitutal_velocity_cost.hpp>
 
 #include <memory>
+#include <iostream>
 
 namespace frenet_trajectory_planner
 {
 
+class FrenetTrajectoryPlanner
+{
+public:
+  FrenetTrajectoryPlanner();
+  CartesianTrajectory plan(
+    const CartesianState & robot_cartesian_state,
+    const CartesianPoint & start_point, const CartesianPoint & final_point);
+
+private:
+  double min_lateral_distance_;
+  double max_lateral_distance_;
+  double step_lateral_distance_;
+  double min_longtitutal_velocity_;
+  double max_longtitutal_velocity_;
+  double step_longtitutal_velocity_;
+};
+
+// TODO (CihatAltiparmak) : move the source parts of FrenetTrajectoryPlanner to cpp file. Now to move to cpp file throws out multiple definition error when built
 FrenetTrajectoryPlanner::FrenetTrajectoryPlanner()
 {
   min_lateral_distance_ = -1;
@@ -34,6 +53,9 @@ CartesianTrajectory FrenetTrajectoryPlanner::plan(
     Cartesian2FrenetConverter<LineAdapter>(start_point, final_point);
 
   auto robot_frenet_state = cartesian2frenet_converter.convert_state(robot_cartesian_state);
+
+  std::cerr << frenet2cartesian_converter.convert_state(robot_frenet_state) << ", " <<
+    robot_frenet_state << std::endl;
 
   auto frenet_trajectory_generator = FrenetTrajectoryGenerator(
     min_lateral_distance_,

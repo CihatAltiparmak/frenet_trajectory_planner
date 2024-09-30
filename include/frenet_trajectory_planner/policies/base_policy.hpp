@@ -13,6 +13,7 @@ namespace policies
 class Policy
 {
 public:
+  Policy() {}
   virtual std::vector<FrenetTrajectory> eliminate_frenet_trajectories(
     const std::vector<FrenetTrajectory> & frenet_trajectory_array)
   = 0;
