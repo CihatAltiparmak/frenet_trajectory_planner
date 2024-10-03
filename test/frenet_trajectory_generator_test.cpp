@@ -2,9 +2,16 @@
 #include <gtest/gtest.h>
 
 TEST(frenet_trajectory_planner, frenet_trajectory_generator_test_initialization) {
+  using frenet_trajectory_planner::FrenetTrajectoryPlannerConfig;
 
-  frenet_trajectory_planner::FrenetTrajectoryGenerator frenet_trajectory_generator(0, 1, 0.1, 0, 1,
-    0.1);
+  FrenetTrajectoryPlannerConfig planner_config;
+  planner_config.min_lateral_distance = -1;
+  planner_config.max_lateral_distance = 1;
+  planner_config.step_lateral_distance = 0.1;
+  planner_config.min_longtitutal_velocity = -1;
+  planner_config.max_longtitutal_velocity = 1;
+  planner_config.step_longtitutal_velocity = 0.1;
+  frenet_trajectory_planner::FrenetTrajectoryGenerator frenet_trajectory_generator(planner_config);
 }
 
 TEST(
@@ -12,10 +19,17 @@ TEST(
   frenet_trajectory_generator_test_get_all_possible_frenet_trajectories) {
 
   using frenet_trajectory_planner::FrenetState;
+  using frenet_trajectory_planner::FrenetTrajectoryPlannerConfig;
 
-  frenet_trajectory_planner::FrenetTrajectoryGenerator frenet_trajectory_generator(-1, 1, 0.1, -1,
-    1,
-    0.1);
+  FrenetTrajectoryPlannerConfig planner_config;
+  planner_config.min_lateral_distance = -1;
+  planner_config.max_lateral_distance = 1;
+  planner_config.step_lateral_distance = 0.1;
+  planner_config.min_longtitutal_velocity = -1;
+  planner_config.max_longtitutal_velocity = 1;
+  planner_config.step_longtitutal_velocity = 0.1;
+
+  frenet_trajectory_planner::FrenetTrajectoryGenerator frenet_trajectory_generator(planner_config);
 
   FrenetState frenet_state_initial = FrenetState::Zero();
   frenet_state_initial[1] = 1;

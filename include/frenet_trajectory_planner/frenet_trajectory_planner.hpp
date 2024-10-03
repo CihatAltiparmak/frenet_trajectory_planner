@@ -18,28 +18,30 @@ class FrenetTrajectoryPlanner
 {
 public:
   FrenetTrajectoryPlanner();
+  FrenetTrajectoryPlanner(const FrenetTrajectoryPlannerConfig & frenet_planner_config);
   CartesianTrajectory plan(
     const CartesianState & robot_cartesian_state,
     const CartesianPoint & start_point, const CartesianPoint & final_point);
 
 private:
-  double min_lateral_distance_;
-  double max_lateral_distance_;
-  double step_lateral_distance_;
-  double min_longtitutal_velocity_;
-  double max_longtitutal_velocity_;
-  double step_longtitutal_velocity_;
+  FrenetTrajectoryPlannerConfig frenet_planner_config_;
 };
 
 // TODO (CihatAltiparmak) : move the source parts of FrenetTrajectoryPlanner to cpp file. Now to move to cpp file throws out multiple definition error when built
 FrenetTrajectoryPlanner::FrenetTrajectoryPlanner()
 {
-  min_lateral_distance_ = -1;
-  max_lateral_distance_ = 1;
-  step_lateral_distance_ = 0.5;
-  min_longtitutal_velocity_ = 0;
-  max_longtitutal_velocity_ = 2;
-  step_longtitutal_velocity_ = 0.5;
+  frenet_planner_config_.min_lateral_distance = -1;
+  frenet_planner_config_.max_lateral_distance = 1;
+  frenet_planner_config_.step_lateral_distance = 0.5;
+  frenet_planner_config_.min_longtitutal_velocity = 0;
+  frenet_planner_config_.max_longtitutal_velocity = 2;
+  frenet_planner_config_.step_longtitutal_velocity = 0.5;
+}
+
+FrenetTrajectoryPlanner::FrenetTrajectoryPlanner(
+  const FrenetTrajectoryPlannerConfig & frenet_planner_config)
+: frenet_planner_config_(frenet_planner_config)
+{
 }
 
 CartesianTrajectory FrenetTrajectoryPlanner::plan(
@@ -57,13 +59,7 @@ CartesianTrajectory FrenetTrajectoryPlanner::plan(
   std::cerr << frenet2cartesian_converter.convert_state(robot_frenet_state) << ", " <<
     robot_frenet_state << std::endl;
 
-  auto frenet_trajectory_generator = FrenetTrajectoryGenerator(
-    min_lateral_distance_,
-    max_lateral_distance_,
-    step_lateral_distance_,
-    min_longtitutal_velocity_,
-    max_longtitutal_velocity_,
-    step_longtitutal_velocity_);
+  auto frenet_trajectory_generator = FrenetTrajectoryGenerator(frenet_planner_config_);
   // TODO (CihatAltiparmak) : eliminate some trajectories in frenet level
   auto all_frenet_trajectories = frenet_trajectory_generator.get_all_possible_frenet_trajectories(
     robot_frenet_state);

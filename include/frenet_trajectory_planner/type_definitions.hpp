@@ -18,4 +18,15 @@ using CartesianTrajectory = std::vector<CartesianState>;
 
 using CartesianPoint = Vector2d;
 
+typedef struct FrenetTrajectoryPlannerConfig
+{
+  double min_lateral_distance;
+  double max_lateral_distance;
+  double step_lateral_distance;
+  double min_longtitutal_velocity;
+  double max_longtitutal_velocity;
+  double step_longtitutal_velocity;
+  double time_interval = 1;
+} FrenetTrajectoryPlannerConfig;
+
 }

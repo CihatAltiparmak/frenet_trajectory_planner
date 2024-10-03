@@ -16,13 +16,7 @@ namespace frenet_trajectory_planner
 class FrenetTrajectoryGenerator
 {
 public:
-  FrenetTrajectoryGenerator(
-    double min_lateral_distance,
-    double max_lateral_distance,
-    double step_lateral_distance,
-    double min_longtitutal_velocity,
-    double max_longtitutal_velocity,
-    double step_longtitutal_velocity);
+  FrenetTrajectoryGenerator(const FrenetTrajectoryPlannerConfig & frenet_planner_config);
 
   std::vector<FrenetTrajectory> get_all_possible_frenet_trajectories(
     const FrenetState & frenet_state_initial);
@@ -32,13 +26,7 @@ public:
     const FrenetState & frenet_state_final);
 
 private:
-  double min_lateral_distance_;
-  double max_lateral_distance_;
-  double step_lateral_distance_;
-
-  double min_longtitutal_velocity_;
-  double max_longtitutal_velocity_;
-  double step_longtitutal_velocity_;
+  FrenetTrajectoryPlannerConfig frenet_planner_config_;
 };
 
 }
