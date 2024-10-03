@@ -6,18 +6,8 @@ namespace frenet_trajectory_planner
 {
 
 FrenetTrajectoryGenerator::FrenetTrajectoryGenerator(
-  double min_lateral_distance,
-  double max_lateral_distance,
-  double step_lateral_distance,
-  double min_longtitutal_velocity,
-  double max_longtitutal_velocity,
-  double step_longtitutal_velocity)
-:   min_lateral_distance_(min_lateral_distance),
-  max_lateral_distance_(max_lateral_distance),
-  step_lateral_distance_(step_lateral_distance),
-  min_longtitutal_velocity_(min_longtitutal_velocity),
-  max_longtitutal_velocity_(max_longtitutal_velocity),
-  step_longtitutal_velocity_(step_longtitutal_velocity)
+  const FrenetTrajectoryPlannerConfig & frenet_planner_config)
+: frenet_planner_config_(frenet_planner_config)
 {}
 
 std::vector<FrenetTrajectory> FrenetTrajectoryGenerator::get_all_possible_frenet_trajectories(
@@ -25,13 +15,13 @@ std::vector<FrenetTrajectory> FrenetTrajectoryGenerator::get_all_possible_frenet
 {
 
   std::vector<FrenetTrajectory> frenet_trajectories;
-  for (double longtitutal_velocity_final = min_longtitutal_velocity_;
-    longtitutal_velocity_final <= max_longtitutal_velocity_;
-    longtitutal_velocity_final += step_longtitutal_velocity_)
+  for (double longtitutal_velocity_final = frenet_planner_config_.min_longtitutal_velocity;
+    longtitutal_velocity_final <= frenet_planner_config_.max_longtitutal_velocity;
+    longtitutal_velocity_final += frenet_planner_config_.step_longtitutal_velocity)
   {
-    for (double lateral_distance_final = min_lateral_distance_;
-      lateral_distance_final <= max_lateral_distance_;
-      lateral_distance_final += step_lateral_distance_)
+    for (double lateral_distance_final = frenet_planner_config_.min_lateral_distance;
+      lateral_distance_final <= frenet_planner_config_.max_lateral_distance;
+      lateral_distance_final += frenet_planner_config_.step_lateral_distance)
     {
       StateLongtitutal state_longtitutal_final;
       state_longtitutal_final << 0, longtitutal_velocity_final, 0;
@@ -61,7 +51,7 @@ FrenetTrajectory FrenetTrajectoryGenerator::get_frenet_trajectory(
   if (!longtitutal_velocity_planner.set_coefficients_or_return_false(
       longtitual_state_initial[0], longtitual_state_initial[1], longtitual_state_initial[2],
       longtitual_state_final[1], longtitual_state_final[2],
-      0, 1))
+      0, frenet_planner_config_.time_interval))
   {
     return {};
   }
@@ -72,7 +62,7 @@ FrenetTrajectory FrenetTrajectoryGenerator::get_frenet_trajectory(
   if (!lateral_distance_planner.set_coefficients_or_return_false(
       lateral_state_initial[0], lateral_state_initial[1], lateral_state_initial[2],
       lateral_state_final[0], lateral_state_final[1], lateral_state_final[2],
-      0, 1))
+      0, frenet_planner_config_.time_interval))
   {
     return {};
   }

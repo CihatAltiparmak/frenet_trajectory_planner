@@ -20,20 +20,16 @@ int main()
   frenet_state_initial[3] = 0.7;
   frenet_state_initial[4] = 0.5;
 
-  double min_lateral_distance = -1;
-  double max_lateral_distance = 1;
-  double step_lateral_distance = 0.5;
-  double min_longtitutal_velocity = 0;
-  double max_longtitutal_velocity = 2;
-  double step_longtitutal_velocity = 0.5;
+  frenet_trajectory_planner::FrenetTrajectoryPlannerConfig planner_config;
+  planner_config.min_lateral_distance = -1;
+  planner_config.max_lateral_distance = 1;
+  planner_config.step_lateral_distance = 0.5;
+  planner_config.min_longtitutal_velocity = 0;
+  planner_config.max_longtitutal_velocity = 2;
+  planner_config.step_longtitutal_velocity = 0.5;
 
   auto frenet_trajectory_generator = frenet_trajectory_planner::FrenetTrajectoryGenerator(
-    min_lateral_distance,
-    max_lateral_distance,
-    step_lateral_distance,
-    min_longtitutal_velocity,
-    max_longtitutal_velocity,
-    step_longtitutal_velocity);
+    planner_config);
   // TODO (CihatAltiparmak) : eliminate some trajectories in frenet level
   auto all_frenet_trajectories = frenet_trajectory_generator.get_all_possible_frenet_trajectories(
     frenet_state_initial);
