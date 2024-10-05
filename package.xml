@@ -3,15 +3,19 @@
 <package format="3">
   <name>frenet_trajectory_planner</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Optimal Trajectory Planner Which Uses Frenet Frames</description>
   <maintainer email="cihataltiparmak1@gmail.com">Cihat Kurtuluş Altıparmak</maintainer>
-  <license>TODO: License declaration</license>
+  <license>GPL-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_depend>eigen</build_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
+  <build_export_depend>eigen</build_export_depend>
+  
   <export>
     <build_type>ament_cmake</build_type>
   </export>
