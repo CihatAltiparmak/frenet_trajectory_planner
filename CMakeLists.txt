@@ -16,6 +16,19 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
+add_library(frenet_trajectory_planner_lib SHARED
+  src/frenet_trajectory_generator.cpp
+  src/quartic_trajectory_planner.cpp
+  src/quintic_trajectory_planner.cpp)
+
+target_include_directories(
+  frenet_trajectory_planner_lib
+  PUBLIC $<INSTALL_INTERFACE:include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+target_include_directories(frenet_trajectory_planner_lib PUBLIC ${Eigen3_INCLUDE_DIRS})
+target_link_libraries(frenet_trajectory_planner_lib  Eigen3::Eigen)
+
 add_subdirectory(demos)
 
 if(BUILD_TESTING)
